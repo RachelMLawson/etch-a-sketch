@@ -3,6 +3,24 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+
+
+.btnContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.newGridBtn {
+    height: 50px;
+    width: 250px;
+    border-radius: 10px;
+    font-size: 20px;
+    margin-top: 50px;
+    margin-bottom: 0px;
 }
 
 #gridContainer {
@@ -39,4 +57,5 @@ body {
     margin: 0px; 
     background-color: black;
 }
+
 
