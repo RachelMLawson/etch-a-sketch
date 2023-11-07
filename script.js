@@ -1,14 +1,5 @@
-/*
-1. Create 16x16 grid of square divs
-    - use JS
-    - put inside container div
-    - careful with borders and margins affectng size of boxes
-2. Change div background color when mouseover
-3. Add button to trigger a popup asking for number of squares per side for new grid. Replace old grid with new (takes up same total space as
-    previous grid). User input has max of 100. (hint: research button tags and prompts)
 
-*/
-
+// create new grid button
 let btnContainer = document.createElement('div');
 btnContainer.classList.add('btnContainer');
 document.body.insertBefore(btnContainer, document.body.firstChild);
@@ -18,9 +9,20 @@ let btnText = document.createTextNode("Create New Grid");
 newGridBtn.appendChild(btnText);
 newGridBtn.addEventListener('click', function() {
     // Display the prompt when the button is clicked
-    const userInput = prompt('Please enter the number of squares per side: ');
+    const userInput = prompt("Please enter the number of squares per side: ");
     console.log(userInput);
-    });
+    if (userInput < 0 || userInput > 100 || isNaN(userInput)) {
+        alert("Must be a number between 1 and 100")
+    }
+    else if (userInput > 0 && userInput <= 100) {
+        while (gridContainer.hasChildNodes()) {
+            gridContainer.removeChild(gridContainer.firstChild)
+            console.log("removing square");
+        }
+        buildGrid(userInput);
+    }
+});
+
 btnContainer.appendChild(newGridBtn);
 
 let gridContainer = document.getElementById('gridContainer');
@@ -32,13 +34,17 @@ function buildGrid(squaresPerSide) {
         let gridSquare = document.createElement('div'); 
         gridSquare.classList.add('square'); 
 
+        // find height and width of squares to make them fit the grid container
+        let squareHeight = gridContainer.clientHeight / squaresPerSide;
+        let squareWidth = gridContainer.clientWidth / squaresPerSide;
+        gridSquare.style.height = squareHeight + 'px';
+        gridSquare.style.width = squareWidth + 'px';
+
         gridSquare.addEventListener('mouseover', function() {
             gridSquare.classList.add('square-hover');
         });
 
         gridContainer.appendChild(gridSquare);
-
-        console.log("Append a square");
     }
 }
 
